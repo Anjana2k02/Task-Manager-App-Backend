@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("api/user")
 public class UserController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class UserController {
         return userService.updateUser(id, user);
     }
 
-    @GetMapping("")
+    @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {
         return userService.getAllUsers();
     }
