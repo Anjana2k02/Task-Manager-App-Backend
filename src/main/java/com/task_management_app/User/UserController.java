@@ -19,22 +19,22 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update{id}")
     public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
-    @GetMapping("/all")
+    @GetMapping("view/all")
     public ResponseEntity<List<User>> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("view/{id}")
     public ResponseEntity<?> getUserById(@PathVariable String id) {
         return userService.getUserById(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         return userService.deleteUser(id);
     }
