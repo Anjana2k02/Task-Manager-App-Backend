@@ -15,5 +15,5 @@ public class Supervisor {
     private String lastName;
     private String email;
     private String password;
-    private String status;
+    private Boolean status;
 }
