@@ -42,13 +42,15 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @GetMapping("/hello")
-    public ResponseEntity<?> hello(){
-        return ResponseEntity.ok("hello");
-    }
 
     @GetMapping("/report")
     public ResponseEntity<?> userReport(HttpServletResponse response) throws DocumentException, IOException {
         return userService.allUserReport(response);
     }
+
+//    @GetMapping("/hello")
+//    public ResponseEntity<?> hello(){
+//        return ResponseEntity.ok("hello");
+//    }
+
 }
