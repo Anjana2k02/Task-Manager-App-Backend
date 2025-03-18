@@ -1,9 +1,12 @@
 package com.task_management_app.User;
 
+import com.lowagie.text.DocumentException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +45,10 @@ public class UserController {
     @GetMapping("/hello")
     public ResponseEntity<?> hello(){
         return ResponseEntity.ok("hello");
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<?> userReport(HttpServletResponse response) throws DocumentException, IOException {
+        return userService.allUserReport(response);
     }
 }
