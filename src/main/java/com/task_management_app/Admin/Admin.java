@@ -1,4 +1,4 @@
-package com.task_management_app.Supervisor;
+package com.task_management_app.Admin;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
 @Data
-@Document(collection = "supervisors")
-public class Supervisor {
+@Document(collection = "admins")
+public class Admin {
 
     @Id
     private String id;
