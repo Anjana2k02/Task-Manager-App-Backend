@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "*") // Allows all origins (all ports)
+@CrossOrigin(origins = "*") // Allows all origins (all ports) add
 @SpringBootApplication
 @OpenAPIDefinition(
 		info = @Info(
