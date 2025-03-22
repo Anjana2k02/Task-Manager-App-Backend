@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins = "*") // Allows all origins (all ports)
 @RestController
 @RequestMapping("api/user")
 public class UserController {
