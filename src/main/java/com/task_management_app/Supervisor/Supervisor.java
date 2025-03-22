@@ -1,9 +1,9 @@
 package com.task_management_app.Supervisor;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import lombok.Data;
+import org.bson.types.ObjectId;
 
 @Data
 @Document(collection = "supervisors")
@@ -17,3 +17,4 @@ public class Supervisor {
     private String password;
     private Boolean status;
 }
+
