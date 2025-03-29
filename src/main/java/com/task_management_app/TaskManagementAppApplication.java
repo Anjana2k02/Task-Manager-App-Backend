@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 		info = @Info(
 				title = "Task Management API",
 				version = "1.0",
-				description = "API Documentation for Task Management App"
+				description = "API Document" +
+						"ation for Task Management App"
 		)
 )
 public class TaskManagementAppApplication {
