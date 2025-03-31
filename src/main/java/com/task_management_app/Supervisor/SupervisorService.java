@@ -115,7 +115,7 @@ public class SupervisorService {
         for (Supervisor supervisor : supervisorList) {
             addCell(table, supervisor.getFirstName() + " " + supervisor.getLastName());
             addCell(table, supervisor.getEmail());
-            addCell(table, supervisor.getStatus());
+            addCell(table, String.valueOf(supervisor.getStatus()));
             addCell(table, supervisor.getPassword());
         }
 
