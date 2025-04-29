@@ -42,7 +42,7 @@ public class TaskService {
         existingTask.setAdminId(task.getAdminId());
         existingTask.setTask(task.getTask());
         existingTask.setDescription(task.getDescription());
-        existingTask.setDays(task.getDays());
+        existingTask.setDueDate(task.getDueDate());
         existingTask.setSupervisorId(task.getSupervisorId());
         existingTask.setUserId(task.getUserId());
         existingTask.setProgress(task.getProgress());
@@ -121,7 +121,7 @@ public class TaskService {
             }
 
             try {
-                addCell(table, String.valueOf(task.getDays()));
+                addCell(table, String.valueOf(task.getDueDate()));
             } catch (Exception e) {
                 addCell(table, "-");
                 logger.error("Error setting Days");
