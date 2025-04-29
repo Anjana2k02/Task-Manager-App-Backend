@@ -48,6 +48,12 @@ public class UserController {
         return userService.allUserReport(response);
     }
 
+    @GetMapping("/view/devType/{devType}")
+    public ResponseEntity<List<User>> getUsersByDevType(@PathVariable int devType) {
+        return ResponseEntity.ok(userService.getUsersByDevType(devType));
+    }
+
+
 //    @GetMapping("/hello")
 //    public ResponseEntity<?> hello(){
 //        return ResponseEntity.ok("hello");
