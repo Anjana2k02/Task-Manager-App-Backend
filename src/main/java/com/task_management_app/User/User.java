@@ -14,4 +14,8 @@ public class User {
     private String secondName;
     private String email;
     private String password;
+    private int devType;
+    private String country;
+    private String userType;
+
 }

@@ -71,6 +71,11 @@ public class UserService {
         return ResponseEntity.ok("User successfully deleted");
     }
 
+    public List<User> getUsersByDevType(int devType) {
+        return userRepo.findByDevType(devType);
+    }
+
+
     public ResponseEntity<?> allUserReport(HttpServletResponse response) throws IOException, DocumentException {
 
 //        Document document = new Document(PageSize.A3.rotate());
@@ -98,7 +103,7 @@ public class UserService {
         table.setSpacingBefore(10f);
         table.setSpacingAfter(10f);
 
-        String[] headers = {"Full Name", "E-mail", "Password"};
+        String[] headers = {"Full Name", "E-mail", "Country", "Dev Type"};
         for (String header : headers) {
             PdfPCell headerCell = new PdfPCell(new Phrase(header, FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
             headerCell.setBorderWidth(0f);
@@ -130,11 +135,20 @@ public class UserService {
             }
 
             try {
-                addCell(table, userList.get(i).getPassword());
+                addCell(table, userList.get(i).getCountry());
             } catch (Exception e) {
                 addCell(table, "-");
-                logger.error("Error setting password");
+                logger.error("Error setting country");
             }
+
+            try {
+                int devType = userList.get(i).getDevType();
+                addCell(table, String.valueOf(devType));
+            } catch (NullPointerException e) {
+                addCell(table, "-");
+                logger.error("Error setting dev type: Value is null");
+            }
+
         }
 
         response.setContentType("application/pdf");
