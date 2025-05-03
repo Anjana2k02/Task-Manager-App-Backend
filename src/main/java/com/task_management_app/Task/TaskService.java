@@ -28,6 +28,10 @@ public class TaskService {
     private TaskRepo taskRepo;
 
     public ResponseEntity<?> createTask(Task task) {
+        long count = taskRepo.count(); // Get the current number of tasks
+        String taskNumber = String.format("T-%02d", count + 1); // Format: T-01, T-02, etc.
+        task.setT_no(taskNumber); // Set the task number
+
         return ResponseEntity.ok(taskRepo.save(task));
     }
 
