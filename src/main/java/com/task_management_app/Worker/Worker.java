@@ -17,5 +17,7 @@ public class Worker {
     private String password;
     private String country;
     private String status;
+    private String devType;
+    private final String type = "worker";
     private String expressionStatus;
 }

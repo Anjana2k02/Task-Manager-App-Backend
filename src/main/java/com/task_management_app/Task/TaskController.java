@@ -47,9 +47,17 @@ public class TaskController {
         return taskService.allTaskReport(response);
     }
 
-    // Uncomment if needed
-    // @GetMapping("/hello")
-    // public ResponseEntity<?> hello() {
-    //     return ResponseEntity.ok("hello");
-    // }
+//    // 🆕 1. Tasks with no due date (not assigned)
+//    @GetMapping("/task-not-assigned")
+//    public ResponseEntity<List<Task>> getTasksWithNoDueDate() {
+//        return ResponseEntity.ok(TaskRepo.findByDueDateIsNull());
+//    }
+//
+//    // 🆕 2. Tasks with due date (assigned)
+//    @GetMapping("/task-assigned")
+//    public ResponseEntity<List<Task>> getTasksWithDueDate() {
+//        return ResponseEntity.ok(TaskRepo.findByDueDateIsNotNull());
+//    }
+
+
 }
