@@ -98,7 +98,7 @@ public class UserService {
 
         document.add(Chunk.NEWLINE);
 
-        PdfPTable table = new PdfPTable(3); 
+        PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
         table.setSpacingBefore(10f);
         table.setSpacingAfter(10f);

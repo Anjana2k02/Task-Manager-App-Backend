@@ -47,6 +47,15 @@ public class TaskController {
         return taskService.allTaskReport(response);
     }
 
+    @PatchMapping("/{id}/progress")
+    public ResponseEntity<Task> updateProgress(
+            @PathVariable String id,
+            @RequestParam int progress
+    ) {
+        Task updatedTask = taskService.updateTaskProgress(id, progress);
+        return ResponseEntity.ok(updatedTask);
+    }
+
 //    // 🆕 1. Tasks with no due date (not assigned)
 //    @GetMapping("/task-not-assigned")
 //    public ResponseEntity<List<Task>> getTasksWithNoDueDate() {

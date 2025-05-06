@@ -75,6 +75,17 @@ public class TaskService {
         return ResponseEntity.ok("Task successfully deleted");
     }
 
+    public Task updateTaskProgress(String taskId, int progress) {
+        Optional<Task> optionalTask = taskRepo.findById(taskId);
+        if (optionalTask.isPresent()) {
+            Task task = optionalTask.get();
+            task.setProgress(progress);
+            return taskRepo.save(task); // Save updated progress only
+        } else {
+            throw new RuntimeException("Task not found with ID: " + taskId);
+        }
+    }
+
     public ResponseEntity<?> allTaskReport(HttpServletResponse response) throws IOException, DocumentException {
 
         Document document = new Document(PageSize.A4);

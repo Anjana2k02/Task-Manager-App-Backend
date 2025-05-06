@@ -47,6 +47,15 @@ public class WorkerController {
         return workerService.allWorkerReport(response);
     }
 
+    @PatchMapping("/{id}/expression-status")
+    public ResponseEntity<Worker> updateExpressionStatus(
+            @PathVariable String id,
+            @RequestParam String status
+    ) {
+        Worker updatedWorker = workerService.updateExpressionStatus(id, status);
+        return ResponseEntity.ok(updatedWorker);
+    }
+
     // Uncomment this if you want a test endpoint
     // @GetMapping("/hello")
     // public ResponseEntity<?> hello(){

@@ -74,6 +74,17 @@ public class WorkerService {
         return ResponseEntity.ok("Worker successfully deleted");
     }
 
+    public Worker updateExpressionStatus(String workerId, String newStatus) {
+        Optional<Worker> optionalWorker = workerRepo.findById(workerId);
+        if (optionalWorker.isPresent()) {
+            Worker worker = optionalWorker.get();
+            worker.setExpressionStatus(newStatus);
+            return workerRepo.save(worker);
+        } else {
+            throw new RuntimeException("Worker not found with ID: " + workerId);
+        }
+    }
+
     public ResponseEntity<?> allWorkerReport(HttpServletResponse response) throws IOException, DocumentException {
 
         Document document = new Document(PageSize.A4);
