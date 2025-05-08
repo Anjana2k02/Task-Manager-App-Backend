@@ -73,5 +73,34 @@ public class TaskController {
         return taskService.getTaskCount();
     }
 
+    @GetMapping("/completed-task-count")
+    public ResponseEntity<?> getCompletedTaskCount(){
+        return taskService.getCompletedTaskCount();
+    }
+
+    @GetMapping("/pending-task-count")
+    public ResponseEntity<?> getPendingCount(){
+        return taskService.getPendingCount();
+    }
+
+    @GetMapping("/testing-task-count")
+    public ResponseEntity<?> getTestingCount(){
+        return taskService.getTestingCount();
+    }
+
+    @GetMapping("/developing-task-count")
+    public ResponseEntity<?> getDevelopingCount(){
+        return taskService.getDevelopingCount();
+    }
+
+    @GetMapping("/qa-completed-task-count")
+    public ResponseEntity<?> getQACompletedCount(){
+        return taskService.getQACompletedCount();
+    }
+
+    @GetMapping("/in-completed-task-count")
+    public ResponseEntity<?> getInCompletedCount(){
+        return taskService.inCompletedTaskCount();
+    }
 
 }

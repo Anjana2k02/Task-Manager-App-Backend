@@ -173,5 +173,37 @@ public class TaskService {
         return ResponseEntity.ok(taskRepo.getTotalTaskCount());
     }
 
+    public ResponseEntity<?> getCompletedTaskCount (){
+        return ResponseEntity.ok(taskRepo.countCompletedTasks());
+    }
+
+    public ResponseEntity<?> getPendingCount (){
+        return ResponseEntity.ok(taskRepo.countPendingTasks());
+    }
+
+    public ResponseEntity<?> getDevelopingCount (){
+        return ResponseEntity.ok(taskRepo.countDevelopingTasks());
+    }
+
+    public ResponseEntity<?> getTestingCount (){
+        return ResponseEntity.ok(taskRepo.countTestingTasks());
+    }
+
+    public ResponseEntity<?> getQACompletedCount (){
+        return ResponseEntity.ok(taskRepo.countQACompleteTasks());
+    }
+
+    public ResponseEntity<?> inCompletedTaskCount(){
+
+        int dev = (int) taskRepo.countDevelopingTasks();
+        int test =(int) taskRepo.countTestingTasks();
+        int qa = (int) taskRepo.countQACompleteTasks();
+
+        int inCompleted = dev+test+qa;
+
+        return ResponseEntity.ok(inCompleted);
+
+    }
+
 
 }
