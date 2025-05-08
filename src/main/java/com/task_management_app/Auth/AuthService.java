@@ -39,7 +39,7 @@ public class AuthService {
         Optional<Admin> admin = adminRepo.findByEmail(request.getEmail());
         if (admin.isPresent()) {
             if (admin.get().getPassword().equals(request.getPassword())) {
-                LoginResponse response = new LoginResponse(admin.get().getId(), admin.get().getType());
+                LoginResponse response = new LoginResponse(admin.get().getId(), admin.get().getType(), admin.get().getFirstName());
                 return ResponseEntity.ok(response);
             }
         }
@@ -48,7 +48,7 @@ public class AuthService {
         Optional<Supervisor> supervisor = supervisorRepo.findByEmail(request.getEmail());
         if (supervisor.isPresent()) {
             if (supervisor.get().getPassword().equals(request.getPassword())) {
-                LoginResponse response = new LoginResponse(supervisor.get().getId(), supervisor.get().getType());
+                LoginResponse response = new LoginResponse(supervisor.get().getId(), supervisor.get().getType(), supervisor.get().getFirstName());
                 return ResponseEntity.ok(response);
             }
         }
@@ -57,7 +57,7 @@ public class AuthService {
         Optional<Worker> worker = workerRepo.findByEmail(request.getEmail());
         if (worker.isPresent()) {
             if (worker.get().getPassword().equals(request.getPassword())) {
-                LoginResponse response = new LoginResponse(worker.get().getId(), worker.get().getType());
+                LoginResponse response = new LoginResponse(worker.get().getId(), worker.get().getType(), worker.get().getFirstName());
                 return ResponseEntity.ok(response);
             }
         }
