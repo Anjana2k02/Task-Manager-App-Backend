@@ -169,5 +169,9 @@ public class TaskService {
         table.addCell(cell);
     }
 
+    public ResponseEntity<?> getTaskCount (){
+        return ResponseEntity.ok(taskRepo.getTotalTaskCount());
+    }
+
 
 }

@@ -68,5 +68,10 @@ public class TaskController {
 //        return ResponseEntity.ok(TaskRepo.findByDueDateIsNotNull());
 //    }
 
+    @GetMapping("/task-count")
+    public ResponseEntity<?> getTaskCount(){
+        return taskService.getTaskCount();
+    }
+
 
 }
