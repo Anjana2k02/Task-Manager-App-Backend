@@ -1,0 +1,13 @@
+package com.task_management_app.Auth.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class LoginResponse {
+    private String id;
+    private String type;
+    private String name;
+
+}

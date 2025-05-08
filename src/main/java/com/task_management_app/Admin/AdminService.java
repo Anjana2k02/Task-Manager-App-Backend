@@ -1,4 +1,4 @@
-package com.task_management_app.User;
+package com.task_management_app.Admin;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
@@ -20,63 +20,61 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class AdminService {
 
-    Logger logger = LoggerFactory.getLogger(UserService.class);
+    Logger logger = LoggerFactory.getLogger(AdminService.class);
 
     @Autowired
-    private UserRepo userRepo;
+    private AdminRepo adminRepo;
 
-    public ResponseEntity<?> createUser(User user) {
-        if (userRepo.findByEmail(user.getEmail()).isPresent()) {
+    public ResponseEntity<?> createAdmin(Admin admin) {
+        if (adminRepo.findByEmail(admin.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
         }
-        return ResponseEntity.ok(userRepo.save(user));
+        return ResponseEntity.ok(adminRepo.save(admin));
     }
 
-    public ResponseEntity<?> updateUser(String id, User user) {
-        Optional<User> existingUserOptional = userRepo.findById(id);
+    public ResponseEntity<?> updateAdmin(String id, Admin admin) {
+        Optional<Admin> existingAdminOptional = adminRepo.findById(id);
 
-        if (existingUserOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        if (existingAdminOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin not found");
         }
 
-        User existingUser = existingUserOptional.get();
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setSecondName(user.getSecondName());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
+        Admin existingAdmin = existingAdminOptional.get();
+        existingAdmin.setFirstName(admin.getFirstName());
+        existingAdmin.setLastName(admin.getLastName());
+        existingAdmin.setEmail(admin.getEmail());
+        existingAdmin.setPassword(admin.getPassword());
+        existingAdmin.setStatus(admin.getStatus());
 
-        return ResponseEntity.ok(userRepo.save(existingUser));
+        return ResponseEntity.ok(adminRepo.save(existingAdmin));
     }
 
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userRepo.findAll());
+    public ResponseEntity<List<Admin>> getAllAdmins() {
+        return ResponseEntity.ok(adminRepo.findAll());
     }
 
-    public ResponseEntity<?> getUserById(String id) {
-        Optional<User> user = userRepo.findById(id);
-        if (user.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    public ResponseEntity<?> getAdminById(String id) {
+        Optional<Admin> Admin = adminRepo.findById(id);
+        if (Admin.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin not found");
         }
-        return ResponseEntity.ok(user.get());
+        return ResponseEntity.ok(Admin.get());
     }
 
-    public ResponseEntity<?> deleteUser(String id) {
-        Optional<User> user = userRepo.findById(id);
-        if (user.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    public ResponseEntity<?> deleteAdmin(String id) {
+        Optional<Admin> Admin = adminRepo.findById(id);
+        if (Admin.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admin not found");
         }
-        userRepo.deleteById(id);
-        return ResponseEntity.ok("User successfully deleted");
+        adminRepo.deleteById(id);
+        return ResponseEntity.ok("Admin successfully deleted");
     }
 
-    public List<User> getUsersByDevType(int devType) {
-        return userRepo.findByDevType(devType);
-    }
+             //Creat Report
 
-
-    public ResponseEntity<?> allUserReport(HttpServletResponse response) throws IOException, DocumentException {
+        public ResponseEntity<?> allAdminReport(HttpServletResponse response) throws IOException, DocumentException {
 
 //        Document document = new Document(PageSize.A3.rotate());
         Document document = new Document(PageSize.A4);
@@ -84,11 +82,11 @@ public class UserService {
 
         document.open();
 
-        Paragraph title = new Paragraph("User Report", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
+        Paragraph title = new Paragraph("Admin Report", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16));
         title.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(title);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+       // SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         LocalDate now = LocalDate.now();
 
         Paragraph date = new Paragraph(String.valueOf(now), FontFactory.getFont(FontFactory.TIMES_ITALIC, 12));
@@ -98,12 +96,12 @@ public class UserService {
 
         document.add(Chunk.NEWLINE);
 
-        PdfPTable table = new PdfPTable(3);
+        PdfPTable table = new PdfPTable(3); //Column 
         table.setWidthPercentage(100);
         table.setSpacingBefore(10f);
         table.setSpacingAfter(10f);
 
-        String[] headers = {"Full Name", "E-mail", "Country", "Dev Type"};
+        String[] headers = {"Full Name", "E-mail", "Password"};
         for (String header : headers) {
             PdfPCell headerCell = new PdfPCell(new Phrase(header, FontFactory.getFont(FontFactory.HELVETICA_BOLD)));
             headerCell.setBorderWidth(0f);
@@ -114,13 +112,13 @@ public class UserService {
 
 
 
-        List<User> userList = userRepo.findAll();
+        List<Admin> adminList = adminRepo.findAll();
 
-        for (int i=0; i< userList.size(); i++){
+        for (int i=0; i< adminList.size(); i++){
 
 
             try {
-                addCell(table, userList.get(i).getFirstName() + " " + userList.get(i).getSecondName() );
+                addCell(table, adminList.get(i).getFirstName() + " " + adminList.get(i).getLastName() );
             } catch (Exception e) {
                 addCell(table, "-");
                 logger.error("Error setting Name");
@@ -128,32 +126,23 @@ public class UserService {
 
             try {
 //                addCell(table, String.valueOf(userList.get(i).getEmail())); if number use this method
-                addCell(table, userList.get(i).getEmail());
+                addCell(table, adminList.get(i).getEmail());
             } catch (Exception e) {
                 addCell(table, "-");
                 logger.error("Error setting E-mail");
             }
 
             try {
-                addCell(table, userList.get(i).getCountry());
+                addCell(table, adminList.get(i).getPassword());
             } catch (Exception e) {
                 addCell(table, "-");
-                logger.error("Error setting country");
+                logger.error("Error setting password");
             }
-
-            try {
-                int devType = userList.get(i).getDevType();
-                addCell(table, String.valueOf(devType));
-            } catch (NullPointerException e) {
-                addCell(table, "-");
-                logger.error("Error setting dev type: Value is null");
-            }
-
         }
 
         response.setContentType("application/pdf");
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=All_User_Report" + new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss").format(new Date()) + ".pdf";
+        String headerValue = "attachment; filename=All_Admin_Report" + new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss").format(new Date()) + ".pdf";
         response.setHeader(headerKey, headerValue);
 
         document.add(table);
@@ -171,3 +160,4 @@ public class UserService {
     }
 
 }
+

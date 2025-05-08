@@ -1,13 +1,17 @@
-package com.task_management_app.Supervisor;
+package com.task_management_app.Admin;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.bson.types.ObjectId;
+
+import lombok.Data;
 
 @Data
-@Document(collection = "supervisors")
-public class Supervisor {
+@Document(collection = "admins")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Admin {
 
     @Id
     private String id;
@@ -15,7 +19,7 @@ public class Supervisor {
     private String lastName;
     private String email;
     private String password;
-    private final String type = "supervisor";
+    private final String type = "admin";
     private Boolean status;
-}
 
+}
